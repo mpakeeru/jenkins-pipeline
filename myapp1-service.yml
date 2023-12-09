@@ -9,7 +9,7 @@ spec:
   ports:
   - port: 8080
     targetPort: 8080
-    nodePort: 35100
+    nodePort: 32100
   selector:
     app: myapp1
 
