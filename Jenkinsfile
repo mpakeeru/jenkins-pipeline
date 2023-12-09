@@ -30,7 +30,7 @@ pipeline {
     steps {
   withCredentials([usernamePassword(credentialsId: 'sonar', passwordVariable: 'SONAR_PASSWD', usernameVariable: 'SONAR_USER')]) {
     // some block
-       sh 'sonar:sonar -Dsonar.login=$SONAR_USER -Dsonar.password=$SONAR_PASSWD  -Dsonar.host.url=${SONAR_URL}'
+       sh 'mvn sonar:sonar -Dsonar.login=$SONAR_USER -Dsonar.password=$SONAR_PASSWD  -Dsonar.host.url=${SONAR_URL}'
 }
     } 
 
