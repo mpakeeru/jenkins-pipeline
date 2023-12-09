@@ -22,19 +22,19 @@ pipeline {
     }
 
    } 
-  stage('Static Code Analysis') {
-     environment {
-        SONAR_URL = "http://192.168.86.36:9000/"
-      }
+ // stage('Static Code Analysis') {
+   //  environment {
+     //   SONAR_URL = "http://192.168.86.36:9000/"
+     // }
     //static code analysis using sonar qube
-    steps {
-  withCredentials([usernamePassword(credentialsId: 'sonar', passwordVariable: 'SONAR_PASSWD', usernameVariable: 'SONAR_USER')]) {
+   // steps {
+ // withCredentials([usernamePassword(credentialsId: 'sonar', passwordVariable: 'SONAR_PASSWD', usernameVariable: 'SONAR_USER')]) {
     // some block
-       sh 'mvn sonar:sonar -Dsonar.login=$SONAR_USER -Dsonar.password=$SONAR_PASSWD  -Dsonar.host.url=${SONAR_URL}'
-}
-    } 
+     //  sh 'mvn sonar:sonar -Dsonar.login=$SONAR_USER -Dsonar.password=$SONAR_PASSWD  -Dsonar.host.url=${SONAR_URL}'
+//}
+  //  } 
 
-   } 
+  // } 
   stage('Build and Push Docker Image') {
     // Bild Docker Image
     steps {
