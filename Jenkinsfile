@@ -40,7 +40,7 @@ pipeline {
     steps {
        git 'https://github.com/mpakeeru/jenkins-pipeline.git'
         sh "docker build -t myapp1 ."
-       sh "docker tag myapp1:${BUILD_NUMBER} mamathasama/myapp1:${BUILD_NUMBER}"
+       sh "docker tag myapp1:latest mamathasama/myapp1:latest"
       // push docker image
        withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'DOCKER_PASSWD', usernameVariable: 'DOCKER_USER')]) {
     sh "docker login -u ${env.DOCKER_USER} -p ${env.DOCKER_PASSWD} docker.io"
