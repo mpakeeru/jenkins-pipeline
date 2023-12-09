@@ -39,12 +39,12 @@ pipeline {
     // Bild Docker Image
     steps {
        git 'https://github.com/mpakeeru/jenkins-pipeline.git'
-        sh "docker build -t myapp1 ."
-       sh "docker tag myapp1:latest mamathasama/myapp1:latest"
+        sh "docker build -t mamathasama/myapp1:${BUILD_NUMBER} ."
+      // sh "docker tag myapp1:latest mamathasama/myapp1:latest"
       // push docker image
        withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'DOCKER_PASSWD', usernameVariable: 'DOCKER_USER')]) {
     sh "docker login -u ${env.DOCKER_USER} -p ${env.DOCKER_PASSWD} docker.io"
-   sh "docker push mamathasama/myapp1:latest"
+   sh "docker push mamathasama/myapp1:${BUILD_NUMBER}"
 }
     }
 
@@ -56,6 +56,7 @@ pipeline {
     steps {
       sh "kubectl apply -f myapp1-deployment.yml,myapp1-service.yml"
   
+     sh "kubectl set image deployments/myapp1-deployment myapp1-container=mamathasama/myapp1:${BUILD_NUMBER}"
      }
 
 
