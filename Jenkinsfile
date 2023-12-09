@@ -44,7 +44,7 @@ pipeline {
       // push docker image
        withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'DOCKER_PASSWD', usernameVariable: 'DOCKER_USER')]) {
     sh "docker login -u ${env.DOCKER_USER} -p ${env.DOCKER_PASSWD} docker.io"
-   sh "docker push mamathasama/myapp1:${BUILD_NUMBER}"
+   sh "docker push mamathasama/myapp1:latest"
 }
     }
 
